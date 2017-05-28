@@ -5,6 +5,7 @@
   "author": "Max Brauer <max@transcode.de>",
   "license": "BSD",
   "dependencies": {
+    "font-awesome": "^4.7.0",
     "foundation-sites": "^6.3.1"
   }
 }
