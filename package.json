@@ -3,5 +3,8 @@
   "version": "0.1.0",
   "main": "index.js",
   "author": "Max Brauer <max@transcode.de>",
-  "license": "BSD"
+  "license": "BSD",
+  "dependencies": {
+    "foundation-sites": "^6.3.1"
+  }
 }
