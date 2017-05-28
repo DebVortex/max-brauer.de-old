@@ -1,0 +1,7 @@
+{
+  "name": "max-brauer.de",
+  "version": "0.1.0",
+  "main": "index.js",
+  "author": "Max Brauer <max@transcode.de>",
+  "license": "BSD"
+}
