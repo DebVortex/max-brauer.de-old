@@ -1,0 +1,12 @@
+// Foundation for Sites 6 Sass Docs: http://foundation.zurb.com/sites/docs/sass.html
+
+@import 'settings';
+
+@import 'foundation-sites/scss/foundation';
+@include foundation-everything;
+
+@import 'font-awesome/scss/font-awesome';
+
+html, body {
+  height: 100%;
+}
