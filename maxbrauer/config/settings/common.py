@@ -126,6 +126,7 @@ class Common(Configuration):
         'django.contrib.staticfiles.finders.AppDirectoriesFinder',
         'django.contrib.staticfiles.finders.FileSystemFinder',
         #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+        'sass_processor.finders.CssFinder',
     ])
 
     MIDDLEWARE_CLASSES = values.ListValue([
@@ -185,18 +186,31 @@ class Common(Configuration):
         'django.contrib.admin',
         'django.contrib.admindocs',
         'crispy_forms',
+        'sass_processor',
         'rules.apps.AutodiscoverRulesConfig',
+
+        # custom apps
+        'maxbrauer.apps.blog.apps.BlogConfig',
     )
+
+    SASS_PROCESSOR_INCLUDE_DIRS = [
+        os.path.join(BaseDir.BASE_DIR, 'static/scss'),
+        os.path.join(os.path.dirname(BaseDir.BASE_DIR), 'node_modules'),
+    ]
+
+    print(os.path.join(os.path.dirname(BaseDir.BASE_DIR), 'node_modules'))
+
+    SASS_OUTPUT_STYLE = values.Value('compact')
+
+    SASS_PRECISION = values.IntegerValue(8)
+
+    SASS_PROCESSOR_AUTO_INCLUDE = values.BooleanValue(True)
 
     CACHES = values. DictValue({
         'default': {
             'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
         }
     })
-
-    CRISPY_TEMPLATE_PACK = values.Value('bootstrap3')
-
-    GRAPPELLI_ADMIN_TITLE = 'max-brauer.de Admin'
 
     EMAIL_SUBJECT_PREFIX = '[max-brauer.de]'
 
