@@ -14,6 +14,7 @@ class BaseDir(object):
     """
 
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    NODE_MODULES = os.path.join(os.path.dirname(BASE_DIR), 'node_modules')
 
 
 class Common(Configuration):
@@ -79,7 +80,7 @@ class Common(Configuration):
         }
     }
 
-    ALLOWED_HOSTS = values.ListValue(['www.max-brauer.de', 'localhost'])
+    ALLOWED_HOSTS = values.ListValue(['www.max-brauer.de', 'localhost', '127.0.0.1'])
 
     SITE_ID = values.IntegerValue(1)
 
@@ -120,6 +121,7 @@ class Common(Configuration):
         # Always use forward slashes, even on Windows.
         # Don't forget to use absolute paths, not relative paths.
         os.path.join(BaseDir.BASE_DIR, 'static'),
+        BaseDir.NODE_MODULES
     )
 
     STATICFILES_FINDERS = values.ListValue([
@@ -138,6 +140,9 @@ class Common(Configuration):
         'django.contrib.messages.middleware.MessageMiddleware',
         'django.middleware.clickjacking.XFrameOptionsMiddleware',
         'django.middleware.security.SecurityMiddleware',
+
+        'wagtail.wagtailcore.middleware.SiteMiddleware',
+        'wagtail.wagtailredirects.middleware.RedirectMiddleware',
     ])
 
     ROOT_URLCONF = 'maxbrauer.config.urls'
@@ -148,8 +153,11 @@ class Common(Configuration):
         {
             'BACKEND': 'django.template.backends.django.DjangoTemplates',
             'DIRS': [os.path.join(BaseDir.BASE_DIR, 'templates'), ],
-            'APP_DIRS': True,
             'OPTIONS': {
+                'loaders': [
+                    'django.template.loaders.filesystem.Loader',
+                    'django.template.loaders.app_directories.Loader',
+                ],
                 'context_processors': [
                     'django.template.context_processors.debug',
                     'django.template.context_processors.request',
@@ -182,6 +190,7 @@ class Common(Configuration):
         'django.contrib.sessions',
         'django.contrib.sites',
         'django.contrib.messages',
+        'django.contrib.sitemaps',
         'django.contrib.staticfiles',
         'django.contrib.admin',
         'django.contrib.admindocs',
@@ -189,16 +198,34 @@ class Common(Configuration):
         'sass_processor',
         'rules.apps.AutodiscoverRulesConfig',
 
+        # wagtail apps
+        'wagtail.wagtailforms',
+        'wagtail.wagtailredirects',
+        'wagtail.wagtailembeds',
+        'wagtail.wagtailsites',
+        'wagtail.wagtailusers',
+        'wagtail.wagtailsnippets',
+        'wagtail.wagtaildocs',
+        'wagtail.wagtailimages',
+        'wagtail.wagtailsearch',
+        'wagtail.wagtailadmin',
+        'wagtail.wagtailcore',
+        "wagtail.contrib.wagtailsitemaps",
+        'modelcluster',
+        'taggit',
+
+        # wagtail third party
+        'blog',
+
         # custom apps
-        'maxbrauer.apps.blog.apps.BlogConfig',
+        'maxbrauer.apps.pages.apps.PagesConfig',
+        'maxbrauer.apps.blogutils.apps.BlogUtilsConfig',
     )
 
     SASS_PROCESSOR_INCLUDE_DIRS = [
         os.path.join(BaseDir.BASE_DIR, 'static/scss'),
-        os.path.join(os.path.dirname(BaseDir.BASE_DIR), 'node_modules'),
+        BaseDir.NODE_MODULES,
     ]
-
-    print(os.path.join(os.path.dirname(BaseDir.BASE_DIR), 'node_modules'))
 
     SASS_OUTPUT_STYLE = values.Value('compact')
 
@@ -217,3 +244,7 @@ class Common(Configuration):
     DEFAULT_FROM_EMAIL = values.EmailValue('max@max-brauer.de')
 
     SERVER_EMAIL = DEFAULT_FROM_EMAIL
+
+    WAGTAIL_SITE_NAME = "max-brauer.de"
+
+    BLOG_PAGINATION_PER_PAGE = values.IntegerValue(3)

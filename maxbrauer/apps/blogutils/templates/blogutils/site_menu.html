@@ -1,0 +1,25 @@
+{% load blogutils_tags %}
+
+<ul class="dropdown menu main-nav" data-dropdown-menu>
+  {% for page in root.get_children %}
+  <li {% if page.pk == current_page.pk %}class="active"{% endif %}>
+    <a href="{{ page.url }}">{{ page }}</a>
+  </li>
+  {% endfor %}
+  {% if user.is_authenticated %}
+  <li>
+    <a href="#">Hi, {{ user }}</a>
+    <ul class="menu vertical">
+      <li><a href="{% url 'wagtailadmin_home' %}">wagtail admin</a></li>
+      <li><a href="{% url 'admin:index' %}">admin</a></li>
+      <li class="divider"></li>
+      <li><a href="{% url 'wagtailadmin_logout' %}">Logout</a></li>
+    </ul>
+  </li>
+  {% endif %}
+  <li>
+    <a href="{% url 'blog:latest_entries_feed' blog_slug="blog" %}">
+      <i class="fa fa-rss"></i>
+    </a>
+  </li>
+</ul>

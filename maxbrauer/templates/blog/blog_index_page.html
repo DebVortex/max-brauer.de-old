@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags static %}
+
+{% block content %}
+
+  <div class="row">
+    <div class="medium-12 columns">
+
+      {% if category %}
+      <h2 class="white_headline">Category: {{ category }}</h2>
+      {% elif tag %}
+      <h2 class="white_headline">Posts tagged with '{{ tag }}'</h2>
+      {% else %}
+      <h2 class="white_headline">Newest Posts</h2>
+      {% endif %}
+
+      {% for rl in self.related_links.all %}
+      <p>{{ rl.title }}: <a href='{{ rl.link_page.url }}'>{{ rl.link_page }}</a></p>
+      {% endfor %}
+
+      {% if blogs %}
+        {% for blog in blogs %}
+        <div class="card">
+          <div class="card-section">
+            {% include 'blog/blog_post.html' with include_context="index_page" %}
+          </div>
+        </div>
+        {% endfor %}
+      {% else %}
+        <p>There are currently no blog posts</p>
+      {% endif %}
+    </div>
+  </div>
+
+  {% if blogs.has_next or blogs.has_previous %}
+  <div class="row">
+    <div class="small-12 columns">
+    {% if blogs.has_next %}
+      <a class="button float-left" href="?page={{ blogs.next_page_number }}{% for key,value in request.GET.items %}{% ifnotequal key 'page' %}&amp;{{ key }}={{ value }}{% endifnotequal %}{% endfor %}">
+        &larr; Older
+      </a>
+    {% endif %}
+    {% if blogs.has_previous %}
+      <a class="button float-right" href="?page={{ blogs.previous_page_number }}{% for key,value in request.GET.items %}{% ifnotequal key 'page' %}&amp;{{ key }}={{ value }}{% endifnotequal %}{% endfor %}">
+        Newer &rarr;
+      </a>
+    {% endif %}
+    </div>
+  </div>
+  {% endif %}
+
+{% endblock %}
