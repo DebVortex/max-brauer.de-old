@@ -1,0 +1,12 @@
+$background-dark: #0A0A0A;
+$background-light: #5A5A5A;
+$color-dark: #333333;
+$color-light: #999999;
+
+$topbar-background: transparent;
+$button-background: transparent;
+$button-background-hover: rgba($background-dark, 0.25);
+$body-font-color: $color-dark;
+//$body-font-family:
+$anchor-color: scale-color($color-dark, $lightness: -50%);
+$anchor-color-hover: scale-color($anchor-color, $lightness: -50%);
