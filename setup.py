@@ -34,6 +34,7 @@ requires = [
     'rules==1.1.1',
     'libsass==0.12.3',
     'wagtail==1.10.1',
+    'wagtail-blog==1.6.9',
 ]
 
 setup(
