@@ -3,5 +3,10 @@ function setMainHeight() {
     $('#main').css('min-height', minHeight);
 }
 
-$(document).ready(setMainHeight);
-$(document).foundation();
+$(document).ready(function() {
+    setMainHeight();
+    $('pre code').each(function(i, block) {
+        hljs.highlightBlock(block);
+    });
+    $(document).foundation();
+});

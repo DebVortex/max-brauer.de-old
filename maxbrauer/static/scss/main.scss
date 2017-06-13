@@ -6,7 +6,9 @@
 @import 'foundation-sites/scss/foundation';
 @include foundation-everything;
 
+
 @import 'font-awesome/scss/font-awesome';
+@import 'highlightjs/styles/monokai_sublime';
 @import 'shariff/build/shariff.min';
 
 html, body {
