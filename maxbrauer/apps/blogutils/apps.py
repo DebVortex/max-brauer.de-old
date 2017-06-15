@@ -7,6 +7,3 @@ class BlogUtilsConfig(AppConfig):
 
     name = 'maxbrauer.apps.blogutils'
     verbose_name = _("Blogutils")
-
-    def ready(self):
-        from . import wagtails_hooks
