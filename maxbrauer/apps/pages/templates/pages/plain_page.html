@@ -1,1 +1,16 @@
 {% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+  <div class="medium-12 columns">
+    <div class="card">
+      <div class="card-section">
+        <h2>{{ page.title }}</h2>
+        <div>
+          {{ page.body }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

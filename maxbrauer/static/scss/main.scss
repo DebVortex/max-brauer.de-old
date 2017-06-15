@@ -110,3 +110,19 @@ a:hover {
     font-weight: bold;
   }
 }
+
+.rich-text {
+  img {
+    margin-right: 1em;
+    margin-bottom: 1em;
+    &.left {
+      float: left;
+    }
+    &.right {
+      float: right;
+    }
+    &.full-width {
+      display: block;
+    }
+  }
+}
