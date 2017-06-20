@@ -11,6 +11,8 @@
 @import 'highlightjs/styles/monokai_sublime';
 @import 'shariff/build/shariff.min';
 
+@import '../css/icons';
+
 html, body {
   height: 100%;
   background: transparent url("../img/background.png") repeat scroll 0% 0%;
@@ -125,14 +127,4 @@ a:hover {
       display: block;
     }
   }
-}
-
-
-code {
-  padding: 0.3em;
-  margin: 0;
-  font-size: 85%;
-  background-color: rgb(27, 31, 35);
-  background-color: rgba(27, 31, 35, 0.05);
-  border-radius: 3px;
 }
