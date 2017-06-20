@@ -14,7 +14,6 @@ def whitelister_element_rules():
 
 def editor_js():
     js_files = [
-        'highlightjs/highlight.pack.min.js',
         'js/hello_code_plugin.js',
     ]
     js_includes = format_html_join('\n', '<script src="{0}{1}"></script>',
