@@ -9,7 +9,7 @@ function insertCodeblock(event) {
     if (typeof language == 'undefined') {
         elem = '<pre><code>' + lastSelection + '</code></pre>';
     } else {
-        elem = '<pre><code class="' + language + '">' + lastSelection + '</code></pre>';
+        elem = '<pre><code class="hljs ' + language + '">' + lastSelection + '</code></pre>';
     }
     var node = lastSelection.createContextualFragment(elem);
     lastSelection.deleteContents();
@@ -51,13 +51,7 @@ function insertCodeblock(event) {
                     language_button.on('click', insertCodeblock);
                     toolbar.append(language_button);
                 }
-                widget.options.editable.element.on('change', function() {
-                    $('pre code').each(function(i, block) {
-                        hljs.highlightBlock(block);
-                    });
-                });
                 button.on("click", insertCodeblock);
-                widget.options.editable.element.change();
             }
         });
     })(jQuery);
