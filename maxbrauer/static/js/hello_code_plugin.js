@@ -1,16 +1,12 @@
 var widget;
 
-function insertCodeblock(event) {
+function intertLanguageCodeblock(event) {
     var insertionPoint, lastSelection;
     language = $(event.currentTarget).data('language')
     lastSelection = widget.options.editable.getSelection();
     insertionPoint = $(lastSelection.endContainer).parentsUntil('.richtext').last();
     var elem;
-    if (typeof language == 'undefined') {
-        elem = '<pre><code>' + lastSelection + '</code></pre>';
-    } else {
-        elem = '<pre><code class="hljs ' + language + '">' + lastSelection + '</code></pre>';
-    }
+    elem = '<pre><code class="hljs ' + language + '">' + lastSelection + '</code></pre>';
     var node = lastSelection.createContextualFragment(elem);
     lastSelection.deleteContents();
     lastSelection.insertNode(node);
@@ -34,7 +30,7 @@ function insertCodeblock(event) {
                 button.hallobutton({
                     uuid: this.options.uuid,
                     editable: this.options.editable,
-                    label: 'Code Block',
+                    label: 'Inline Code Block',
                     icon: 'fa fa-code',
                     command: null
                 });
@@ -48,10 +44,22 @@ function insertCodeblock(event) {
                         icon: 'code-icon code-icon-' + languages[i],
                         command: null
                     });
-                    language_button.on('click', insertCodeblock);
+                    language_button.on('click', intertLanguageCodeblock);
                     toolbar.append(language_button);
                 }
-                button.on("click", insertCodeblock);
+                button.on("click", function (event) {
+                    var insertionPoint, lastSelection;
+                    language = $(event.currentTarget).data('language')
+                    lastSelection = widget.options.editable.getSelection();
+                    insertionPoint = $(lastSelection.endContainer).parentsUntil('.richtext').last();
+                    var elem;
+                    elem = '<code>' + lastSelection + '</code></pre>';
+                    var node = lastSelection.createContextualFragment(elem);
+                    lastSelection.deleteContents();
+                    lastSelection.insertNode(node);
+                    return widget.options.editable.element.trigger('change');
+                }
+            );
             }
         });
     })(jQuery);
