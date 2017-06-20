@@ -26,7 +26,7 @@ function intertLanguageCodeblock(event) {
                 widget = this;
 
                 button = $('<span></span>');
-                languages = ['python', 'javascript']
+                languages = ['python', 'javascript', 'css']
                 button.hallobutton({
                     uuid: this.options.uuid,
                     editable: this.options.editable,

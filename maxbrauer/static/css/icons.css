@@ -13,6 +13,10 @@
   background-image: url('../img/javascript.svg');
 }
 
+.code-icon-css {
+  background-image: url('../img/css.svg');
+}
+
 code {
   padding: 0.3em;
   margin: 0;
