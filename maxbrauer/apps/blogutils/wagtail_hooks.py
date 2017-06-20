@@ -31,7 +31,6 @@ def editor_js():
 def editor_css():
     cs_files = [
         'css/icons.css',
-        'font-awesome/css/font-awesome.min.css',
         'highlightjs/styles/monokai_sublime.css',
     ]
     return format_html_join('\n', '<link rel="stylesheet" href="{0}{1}">',
