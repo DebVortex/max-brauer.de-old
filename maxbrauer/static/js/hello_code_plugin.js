@@ -1,3 +1,22 @@
+var widget;
+
+function insertCodeblock(event) {
+    var insertionPoint, lastSelection;
+    language = $(event.currentTarget).data('language')
+    lastSelection = widget.options.editable.getSelection();
+    insertionPoint = $(lastSelection.endContainer).parentsUntil('.richtext').last();
+    var elem;
+    if (typeof language == 'undefined') {
+        elem = '<pre><code>' + lastSelection + '</code></pre>';
+    } else {
+        elem = '<pre><code class="' + language + '">' + lastSelection + '</code></pre>';
+    }
+    var node = lastSelection.createContextualFragment(elem);
+    lastSelection.deleteContents();
+    lastSelection.insertNode(node);
+    return widget.options.editable.element.trigger('change');
+}
+
 (function() {
     (function($) {
         return $.widget('IKS.codebutton', {
@@ -6,11 +25,12 @@
                 editable: null
             },
             populateToolbar: function(toolbar) {
-                var button, widget;
+                var button;
 
                 widget = this;
 
                 button = $('<span></span>');
+                languages = ['python', 'javascript']
                 button.hallobutton({
                     uuid: this.options.uuid,
                     editable: this.options.editable,
@@ -19,25 +39,26 @@
                     command: null
                 });
                 toolbar.append(button);
-                console.log(widget);
-                console.log(widget.options.editable);
-                console.log(widget.options.editable.element);
+                for (var i = 0; i < languages.length; i++) {
+                    language_button = $('<span data-language="' + languages[i] + '"></span>');
+                    language_button.hallobutton({
+                        uuid: this.options.uuid,
+                        editable: this.options.editable,
+                        label: languages[i],
+                        icon: 'code-icon code-icon-' + languages[i],
+                        command: null
+                    });
+                    language_button.on('click', insertCodeblock);
+                    console.log(language_button);
+                    toolbar.append(language_button);
+                }
                 widget.options.editable.element.on('change', function() {
                     $('pre code').each(function(i, block) {
                         hljs.highlightBlock(block);
                     });
                 });
-                return button.on("click", function(event) {
-                    var insertionPoint, lastSelection;
-                    lastSelection = widget.options.editable.getSelection();
-                    insertionPoint = $(lastSelection.endContainer).parentsUntil('.richtext').last();
-                    var elem;
-                    elem = "<pre><code>" + lastSelection + "</code></pre>";
-                    var node = lastSelection.createContextualFragment(elem);
-                    lastSelection.deleteContents();
-                    lastSelection.insertNode(node);
-                    return widget.options.editable.element.trigger('change');
-                });
+                button.on("click", insertCodeblock);
+                widget.options.editable.element.change();
             }
         });
     })(jQuery);
