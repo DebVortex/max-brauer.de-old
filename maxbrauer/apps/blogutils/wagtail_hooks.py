@@ -1,5 +1,4 @@
 from django.utils.html import format_html, format_html_join
-from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.conf import settings
 from wagtail.wagtailcore import hooks
 from wagtail.wagtailcore.whitelist import allow_without_attributes, attribute_rule
