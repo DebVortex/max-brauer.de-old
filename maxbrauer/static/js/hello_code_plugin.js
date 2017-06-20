@@ -49,7 +49,6 @@ function insertCodeblock(event) {
                         command: null
                     });
                     language_button.on('click', insertCodeblock);
-                    console.log(language_button);
                     toolbar.append(language_button);
                 }
                 widget.options.editable.element.on('change', function() {
