@@ -1,0 +1,14 @@
+.code-icon {
+  display: block;
+  width: 14px;
+  height: 14px;
+  background-size: 100% 100%;
+}
+
+.code-icon-python {
+  background-image: url('../img/python.svg');
+}
+
+.code-icon-javascript {
+  background-image: url('../img/javascript.svg');
+}
