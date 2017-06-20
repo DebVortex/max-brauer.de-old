@@ -14,8 +14,8 @@ def whitelister_element_rules():
 
 def editor_js():
     js_files = [
-        'js/hello_code_plugin.js',
         'highlightjs/highlight.pack.min.js',
+        'js/hello_code_plugin.js',
     ]
     js_includes = format_html_join('\n', '<script src="{0}{1}"></script>',
         ((settings.STATIC_URL, js_file) for js_file in js_files)
@@ -31,6 +31,7 @@ def editor_js():
 
 def editor_css():
     cs_files = [
+        'css/icons.css',
         'font-awesome/css/font-awesome.min.css',
         'highlightjs/styles/monokai_sublime.css',
     ]
