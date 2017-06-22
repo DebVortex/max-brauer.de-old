@@ -9,9 +9,13 @@
         </a>
 
         {% if blog.date %}
-        <div class="meta date">
-          {{ blog.date|date:"F jS, Y" }}
-          {{ blog.author }}
+        <div class="meta">
+          <div class="date">
+            {{ blog.date|date:"F jS, Y" }}
+          </div>
+          <div class="author">
+            by {{ blog.author.get_full_name }}
+          </div>
         </div>
         {% endif %}
 
