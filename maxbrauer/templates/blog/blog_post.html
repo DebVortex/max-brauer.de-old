@@ -10,12 +10,7 @@
 
         {% if blog.date %}
         <div class="meta">
-          <div class="date">
-            {{ blog.date|date:"F jS, Y" }}
-          </div>
-          <div class="author">
-            by {{ blog.author.get_full_name }}
-          </div>
+            {{ blog.date|date:"F jS, Y" }} by {{ blog.author.get_full_name }}
         </div>
         {% endif %}
 
