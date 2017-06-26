@@ -4,9 +4,16 @@ function setMainHeight() {
 }
 
 $(document).ready(function() {
-    setMainHeight();
+    window.cookieconsent.initialise(
+        {
+            "position": "top",
+            "static": true,
+            "container": document.getElementById("header"),
+        }
+    );
     $('pre code').each(function(i, block) {
         hljs.highlightBlock(block);
     });
     $(document).foundation();
+    setTimeout(setMainHeight, 1000);
 });
