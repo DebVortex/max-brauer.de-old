@@ -20,7 +20,7 @@ extras_require = {
 }
 
 requires = [
-    'Django==1.11.1',
+    'Django==1.11.8',
     'dj-database-url==0.3.0',
     'django-braces==1.8.1',
     'django-compressor==2.1.1',
@@ -33,7 +33,7 @@ requires = [
     'pytz==2015.7',
     'rules==1.1.1',
     'libsass==0.12.3',
-    'wagtail==1.10.1',
+    'wagtail==1.13.1',
     'wagtail-blog==1.6.9',
 ]
 
